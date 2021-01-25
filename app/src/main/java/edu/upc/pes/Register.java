@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONObject;
@@ -27,12 +28,14 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 public class Register extends AppCompatActivity {
-
+    private ProgressBar pb_circul;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         setTitle("REGISTRO");
+        pb_circul = findViewById(R.id.progressBar1);
+        pb_circul.setVisibility(View.INVISIBLE);
     }
     public void registro(View view) {
         EditText nombre=(EditText) findViewById(R.id.name);
@@ -41,6 +44,7 @@ public class Register extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "¡Rellena los campos!",Toast.LENGTH_LONG).show();
         }
         else {
+            pb_circul.setVisibility(View.VISIBLE);
             new Register.RegisterMessage(this).execute("http://10.0.2.2:9000/Application/signUp");
         }
     }
@@ -59,6 +63,7 @@ public class Register extends AppCompatActivity {
 
 
             try {
+
                 EditText nombre=(EditText) findViewById(R.id.name);
                 EditText contra=(EditText) findViewById(R.id.password);
                 String query = String.format(urls[0]);
@@ -103,9 +108,11 @@ public class Register extends AppCompatActivity {
         protected void onPostExecute(String result) {
             if(result.equals("Correcto")){
                 Toast.makeText(getApplicationContext(), "OK",Toast.LENGTH_LONG).show();
+                pb_circul.setVisibility(View.INVISIBLE);
             }
             else{
                 Toast.makeText(getApplicationContext(), "ALGO FALLÓ",Toast.LENGTH_LONG).show();
+                pb_circul.setVisibility(View.INVISIBLE);
             }
 
         }

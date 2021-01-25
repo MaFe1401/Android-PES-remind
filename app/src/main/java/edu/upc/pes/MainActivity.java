@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setTitle("INICIO");
+        setTitle("REMIND: INICIO");
         pb_circular = findViewById(R.id.progressBar2);
         pb_circular.setVisibility(View.INVISIBLE);
     }
