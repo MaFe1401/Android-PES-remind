@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText contra = (EditText) findViewById(R.id.contraText);
         if ((TextUtils.isEmpty(nombre.getText().toString())) || (TextUtils.isEmpty(contra.getText().toString()))) {
             Toast.makeText(getApplicationContext(), "¡Rellena los campos!", Toast.LENGTH_LONG).show();
+            pb_circular.setVisibility(View.INVISIBLE);
         } else {
             new Thread(new Runnable() {
                 InputStream stream = null;
